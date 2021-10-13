@@ -2,8 +2,9 @@ package controller
 
 import (
 	"net/http"
-	"github.com/phu024/sa-64/entity"
+
 	"github.com/gin-gonic/gin"
+	"github.com/phu024/sa-64/entity"
 )
 
 // POST /allergy
@@ -36,7 +37,7 @@ func GetAllergy(c *gin.Context) {
 // GET /allergy
 func ListAllergys(c *gin.Context) {
 	var allergy []entity.Allergy
-	if err := entity.DB().Raw("SELECT * FROM allergys").Scan(&allergy).Error; err != nil {
+	if err := entity.DB().Raw("SELECT * FROM allergies").Scan(&allergy).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -47,7 +48,7 @@ func ListAllergys(c *gin.Context) {
 // DELETE /allergy/:id
 func DeleteAllergy(c *gin.Context) {
 	id := c.Param("id")
-	if tx := entity.DB().Exec("DELETE FROM allergys WHERE id = ?", id); tx.RowsAffected == 0 {
+	if tx := entity.DB().Exec("DELETE FROM allergies WHERE id = ?", id); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "resolution not found"})
 		return
 	}

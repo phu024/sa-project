@@ -10,7 +10,7 @@ import (
 // List all recorder
 func ListRecorder(c *gin.Context) {
 	var recorder []entity.Recorder
-	if err := entity.DB().Raw("SELECT * FROM recorder").Scan(&recorder).Error; err != nil {
+	if err := entity.DB().Raw("SELECT * FROM recorders").Scan(&recorder).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -23,7 +23,7 @@ func ListRecorder(c *gin.Context) {
 func GetRecorder(c *gin.Context) {
 	var recorder entity.Recorder
 	id := c.Param("id")
-	if err := entity.DB().Raw("SELECT * FROM recorder WHERE id = ?", id).Scan(&recorder).Error; err != nil {
+	if err := entity.DB().Raw("SELECT * FROM recorders WHERE id = ?", id).Scan(&recorder).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}

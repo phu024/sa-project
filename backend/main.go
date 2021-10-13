@@ -47,6 +47,7 @@ func main() {
 	r.PATCH("/patients", controller.UpdatePatient)
 	r.DELETE("/patients/:id", controller.DeletePatient)
 
+	// Run the server
 	r.Run()
 }
 
